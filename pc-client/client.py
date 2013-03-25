@@ -2,9 +2,9 @@ import serial
 
 ser=serial.Serial('/dev/ttyS1', 19200, timeout=1)
 inp='null'
-forward='750#750\n'
-backward='250#250\n'
-stop='500#500\n'
+forward='120#120\n'
+backward='070#070\n'
+stop='090#090\n'
 while (inp!='bye'):
     inp=raw_input()
     if (inp=='w'):
