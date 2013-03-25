@@ -1,6 +1,6 @@
 import serial
 
-ser=serial.Serial('/dev/ttyS1', 19200, timeout=1)
+ser=serial.Serial('/dev/ttyS1', 9600, timeout=1)
 inp='null'
 forward='120#120\n'
 backward='070#070\n'
