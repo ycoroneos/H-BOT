@@ -1,6 +1,6 @@
 import serial
 
-ser=serial.Serial('/dev/ttyACM0', 9600, timeout=1)
+ser=serial.Serial('/dev/ttyACM1', 9600, timeout=1)
 inp='null'
 forward='510#510\n'
 backward='000#000\n'

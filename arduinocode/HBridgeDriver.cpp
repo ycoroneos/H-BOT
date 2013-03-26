@@ -4,40 +4,67 @@ HBridgeDriver::HBridgeDriver()
 {
 }
 
-HBridgeDriver::HBridgeDriver(int a, int b, int signal)
+HBridgeDriver::HBridgeDriver(int sp)
 {
-  SetPins(a,b,signal);
+  setSpeed(sp);
+
+}
+void HBridgeDriver::setSpeed(int sp){
+    if (sp < 0){
+        digitalWrite(pinI1, HIGH);
+        digitalWrite(pinI2, HIGH);
+        delay(50);
+        analogWrite(speedpin, 255-abs(sp));
+    } else {
+        digitalWrite(pinI1, HIGH);
+        digitalWrite(pinI2, LOW);
+        delay(50);
+        analogWrite(speedpin, abs(sp));
+    }
 }
 
-void HBridgeDriver::SetPins(int a, int b, int c)
-{
-  pins[0]=a;
-  pins[1]=b;
-  pins[2]=c;
-  for (int i=0; i<3; ++i)
-  {
-    pinMode(pins[i], OUTPUT);
-  }
-}
 
+void HBridgeDriver::setPins(int a, int b, int c)
+{
+  pinI1=a;
+  pinI2=b;
+  speedpin=c;
+  pinMode(pinI1,OUTPUT);//define this port as output
+  pinMode(pinI2,OUTPUT);
+  pinMode(speedpin,OUTPUT);
+  //Stop();
+}
+/*
 void HBridgeDriver::SetSpeed(int speed)
 {
+  //Serial.print("setting speed ");
+  //Serial.println(speed);
   if (speed>255)
   {
-    digitalWrite(pins[0], HIGH);
-    digitalWrite(pins[1], LOW);
-    analogWrite(pins[3], speed-255);
+    analogWrite(speedpin, speed-255);
+    digitalWrite(pinI1, HIGH);
+    digitalWrite(pinI2, LOW);
+    analogWrite(speedpin, speed-255);
+    Serial.println("HIGH LOW");
   }
   else if (speed<255)
   {
-    digitalWrite(pins[0], LOW);
-    digitalWrite(pins[1], HIGH);
-    analogWrite(pins[3], 255-speed);
+    analogWrite(speedpin, 100);
+    digitalWrite(pinI2, LOW);
+    digitalWrite(pinI1, HIGH);
+    analogWrite(speedpin, 100);
+    Serial.println("LOW HIGH");
   }
   else
   {
-    digitalWrite(pins[0], HIGH);
-    digitalWrite(pins[1], HIGH);
-    analogWrite(pins[3], 255);
+    Stop();
+    Serial.println("stopping");
   }
 }
+
+void HBridgeDriver::Stop()
+{
+  digitalWrite(pinI1, HIGH);
+  digitalWrite(pinI2, HIGH);
+  analogWrite(speedpin,255);
+}*/

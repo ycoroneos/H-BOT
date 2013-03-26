@@ -1,23 +1,27 @@
-#include <stdio.h>
-#include <Servo.h>
 #include "HBridgeDriver.h"
+#include <stdio.h>
 
-HBridgeDriver leftWheel, rightWheel;
+HBridgeDriver leftw,rightw;
+int left,right;
+char command[7];
 
-void setup(){
-   Serial.begin(9600);
-   leftWheel.SetPins(4,5,0);
-   rightWheel.SetPins(6,7,1);
+void setup()
+{
+  Serial.begin(9600);
+  leftw.setPins(52,53,4);
+  rightw.setPins(50,51,3);
 }
-
 void loop()
 {
-  char command[7];
-  Serial.readBytesUntil('\n', command,7);
-  command[3] = '\0'; // replace # with \0 and effectively 2 strings
-  int left = atoi(&command[0]);
-  int right = atoi(&command[4]);
-  leftWheel.SetSpeed(left);
-  rightWheel.SetSpeed(right);
-  delay(15);
+  
+  while(Serial.available()<=0){}
+  Serial.readBytesUntil('\n',command, 7);
+  Serial.println((char *)&command);
+  command[3] = '\0';
+  left = atoi(&command[0])-255;
+  right = atoi(&command[4])-255; 
+
+      leftw.setSpeed(left);
+      rightw.setSpeed(right);
+
 }
