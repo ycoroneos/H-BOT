@@ -1,13 +1,13 @@
-
 #include <stdio.h>
 #include <Servo.h>
+#include "HBridgeDriver.h"
 
-Servo leftWheel, rightWheel;
+HBridgeDriver leftWheel, rightWheel;
 
 void setup(){
    Serial.begin(9600);
-   leftWheel.attach(9);
-   rightWheel.attach(8);
+   leftWheel.SetPins(4,5,0);
+   rightWheel.SetPins(6,7,1);
 }
 
 void loop()
@@ -17,7 +17,7 @@ void loop()
   command[3] = '\0'; // replace # with \0 and effectively 2 strings
   int left = atoi(&command[0]);
   int right = atoi(&command[4]);
-  leftWheel.write(left);
-  rightWheel.write(right);
+  leftWheel.SetSpeed(left);
+  rightWheel.SetSpeed(right);
   delay(15);
 }

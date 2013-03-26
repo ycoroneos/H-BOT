@@ -22,22 +22,22 @@ void HBridgeDriver::SetPins(int a, int b, int c)
 
 void HBridgeDriver::SetSpeed(int speed)
 {
-  if (speed>0)
+  if (speed>255)
   {
     digitalWrite(pins[0], HIGH);
     digitalWrite(pins[1], LOW);
-    analogWrite(pins[3], abs(speed));
+    analogWrite(pins[3], speed-255);
   }
-  else if (speed<0)
+  else if (speed<255)
   {
     digitalWrite(pins[0], LOW);
     digitalWrite(pins[1], HIGH);
-    analogWrite(pins[3], abs(speed));
+    analogWrite(pins[3], 255-speed);
   }
   else
   {
     digitalWrite(pins[0], HIGH);
     digitalWrite(pins[1], HIGH);
-    analogWrite(pins[3], 0);
+    analogWrite(pins[3], 255);
   }
 }

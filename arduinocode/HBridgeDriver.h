@@ -8,5 +8,5 @@ class HBridgeDriver
     HBridgeDriver();
     HBridgeDriver(int a, int b, int signal);
     void SetPins(int a, int b, int signal);
-    void SetSpeed(int speed); //-255 to 255
+    void SetSpeed(int speed); //0 to 510
 };
