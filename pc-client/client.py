@@ -2,9 +2,9 @@ import serial
 
 ser=serial.Serial('/dev/ttyACM0', 9600, timeout=1)
 inp='null'
-forward='120#120\n'
-backward='070#070\n'
-stop='000#000\n'
+forward='510#510\n'
+backward='000#000\n'
+stop='255#255\n'
 while (inp!='bye'):
     inp=raw_input()
     if (inp=='w'):
